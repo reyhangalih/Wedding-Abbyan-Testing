@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abbyan & Nabila — Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F5F0E8;
+    --black: #111111;
+    --gray: #555555;
+    --light-gray: #999999;
+    --border: rgba(17,17,17,0.15);
+  }
+
+  body {
+    background: #E8E3DB;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  .invite {
+    background: var(--cream);
+    color: var(--black);
+    font-family: 'Space Grotesk', sans-serif;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  }
+
+  .grid-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 3rem 2rem 2rem;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .names-block { margin-bottom: 2rem; }
+
+  .name-large {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    line-height: 1.0;
+    font-weight: 700;
+    display: block;
+  }
+
+  .name-large.italic {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .ampersand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--gray);
+    display: block;
+    margin: 0.3rem 0;
+  }
+
+  .hero-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .date-block .day {
+    font-size: 3rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .date-block .month-year {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  .countdown-block { text-align: right; }
+
+  .countdown-block .countdown-num {
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+
+  .countdown-block .countdown-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    padding: 2rem;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-tag::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--light-gray);
+  }
+
+  /* ── EVENTS ── */
+  .event-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--black);
+    border: 1px solid var(--black);
+  }
+
+  .event-cell {
+    background: var(--cream);
+    padding: 1.2rem;
+  }
+
+  .event-cell .event-name {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 0.5rem;
+  }
+
+  .event-cell .event-time {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .event-cell .event-venue {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.4;
+  }
+
+  .event-cell.inverted {
+    background: var(--black);
+    color: var(--cream);
+  }
+
+  .event-cell.inverted .event-name { color: #999; }
+  .event-cell.inverted .event-venue { color: #ccc; }
+
+  .map-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+    padding: 0.8rem;
+    border: 1px solid var(--black);
+    background: transparent;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--black);
+    text-decoration: none;
+    transition: all 0.2s;
+    width: 100%;
+  }
+
+  .map-btn:hover {
+    background: var(--black);
+    color: var(--cream);
+  }
+
+  /* ── QUOTE ── */
+  .quote-section {
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid var(--black);
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    line-height: 0.7;
+    color: #ccc;
+    flex-shrink: 0;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: #333;
+  }
+
+  .quote-source {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-style: normal;
+    color: var(--gray);
+    margin-top: 0.8rem;
+    display: block;
+  }
+
+  /* ── PHOTO POLAROID ── */
+  .photo-section {
+    padding: 0;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .photo-section .section-tag {
+    padding: 1.5rem 2rem 0;
+  }
+
+  .board {
+    position: relative;
+    height: 500px;
+    margin: 0.5rem 1rem;
+  }
+
+  .main-photo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 240px;
+    height: 260px;
+    background: #2a2a2a;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .main-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+  }
+
+  /* Placeholder jika foto belum di-upload */
+  .main-photo .placeholder {
+    width: 100%;
+    height: 100%;
+    background: #2a2a2a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .main-photo .placeholder span {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 0.1em;
+  }
+
+  .typewriter-overlay {
+    position: absolute;
+    bottom: 12px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.5;
+    padding: 0 12px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  }
+
+  .polaroid {
+    position: absolute;
+    background: #fff;
+    padding: 8px 8px 28px;
+    z-index: 3;
+    transition: transform 0.2s, z-index 0s;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+  }
+
+  .polaroid:hover {
+    transform: scale(1.06) rotate(0deg) !important;
+    z-index: 10;
+  }
+
+  .polaroid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    display: block;
+  }
+
+  .polaroid .ph {
+    width: 100%;
+    height: 100%;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .polaroid .ph span {
+    font-size: 9px;
+    color: #999;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .polaroid .pin {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 13px;
+    height: 13px;
+    background: #cc1100;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    z-index: 4;
+  }
+
+  .polaroid .caption {
+    position: absolute;
+    bottom: 6px;
+    left: 0; right: 0;
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    color: #444;
+  }
+
+  .p1 { width: 128px; height: 138px; top: 30px;  left: 6px;   transform: rotate(-8deg); }
+  .p2 { width: 115px; height: 125px; top: 15px;  right: 14px; transform: rotate(6deg);  }
+  .p3 { width: 122px; height: 132px; top: 275px; left: 4px;   transform: rotate(7deg);  }
+  .p4 { width: 118px; height: 128px; top: 290px; right: 8px;  transform: rotate(-5deg); }
+
+  .handwriting {
+    font-family: 'Special Elite', cursive;
+    font-size: 1rem;
+    color: #222;
+    text-align: center;
+    padding: 1rem 2rem 1.5rem;
+    line-height: 1.7;
+  }
+
+  /* ── RSVP ── */
+  .rsvp-section {
+    padding: 2rem;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .rsvp-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--black);
+    padding: 0.8rem 0;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    color: var(--black);
+    outline: none;
+    margin-bottom: 1rem;
+  }
+
+  .rsvp-input::placeholder { color: #aaa; }
+
+  .rsvp-radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1.2rem;
+  }
+
+  .rsvp-radio {
+    border: 1px solid var(--black);
+    padding: 0.7rem;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: transparent;
+    color: var(--black);
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .rsvp-radio.selected {
+    background: var(--black);
+    color: var(--cream);
+  }
+
+  .rsvp-btn {
+    width: 100%;
+    background: var(--black);
+    color: var(--cream);
+    border: none;
+    padding: 1rem;
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .rsvp-btn:hover { opacity: 0.8; }
+
+  /* ── AMPLOP ── */
+  .amplop-section {
+    padding: 2rem;
+    border-bottom: 1px solid var(--black);
+  }
+
+  .bank-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 0.5px solid #ccc;
+    font-size: 13px;
+  }
+
+  .bank-name { font-weight: 500; }
+  .bank-atas { color: var(--gray); font-size: 11px; }
+
+  .copy-btn {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 0.5px solid var(--black);
+    padding: 4px 10px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--black);
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover {
+    background: var(--black);
+    color: var(--cream);
+  }
+
+  /* ── FOOTER ── */
+  .footer-section {
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .footer-names {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-date {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--black);
+    color: var(--cream);
+    padding: 0.6rem 1.4rem;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+  }
+
+  .toast.show { opacity: 1; }
+
+  /* ── GUIDE BAR ── */
+  .guide-bar {
+    background: var(--black);
+    color: var(--cream);
+    text-align: center;
+    padding: 0.8rem 1.5rem;
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--black);
+  }
+</style>
+</head>
+<body>
+
+<div class="invite">
+  <div class="grid-bg"></div>
+  <div class="content">
+
+    <!-- GUIDE BAR — hapus setelah foto di-upload -->
+    <div class="guide-bar">
+      ✦ Ganti src="" di tag &lt;img&gt; dengan URL foto asli ✦
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="label">
+        <span>Wedding Invitation</span>
+        <span>2025</span>
+      </div>
+      <div class="names-block">
+        <span class="name-large">Abbyan</span>
+        <span class="name-large">Nur Faizy</span>
+        <span class="ampersand">&amp;</span>
+        <span class="name-large italic">Nabila</span>
+        <span class="name-large italic">Alifia</span>
+      </div>
+      <div class="hero-footer">
+        <div class="date-block">
+          <div class="day">24</div>
+          <div class="month-year">Agustus · 2025</div>
+        </div>
+        <div class="countdown-block">
+          <div class="countdown-num" id="countdown-days">—</div>
+          <div class="countdown-label">Hari lagi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACARA -->
+    <div class="section">
+      <div class="section-tag">Rangkaian Acara</div>
+      <div class="event-grid">
+        <div class="event-cell">
+          <div class="event-name">Akad Nikah</div>
+          <div class="event-time">08.00</div>
+          <div class="event-venue">Masjid Al-Hikmah<br>Jl. Pahlawan No. 12, Jakarta</div>
+        </div>
+        <div class="event-cell inverted">
+          <div class="event-name">Resepsi</div>
+          <div class="event-time">11.00</div>
+          <div class="event-venue">Grand Ballroom Hotel Mulia<br>Jakarta Selatan</div>
+        </div>
+      </div>
+      <a class="map-btn" href="https://maps.google.com" target="_blank">
+        ↗ Buka di Google Maps
+      </a>
+    </div>
+
+    <!-- QUOTE -->
+    <div class="quote-section">
+      <div class="quote-mark">"</div>
+      <div class="quote-text">
+        Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu pasangan dari jenismu sendiri, supaya kamu merasa tenteram kepadanya.
+        <span class="quote-source">QS. Ar-Rum: 21</span>
+      </div>
+    </div>
+
+    <!-- PHOTO POLAROID -->
+    <div class="photo-section">
+      <div class="section-tag">Our Story</div>
+
+      <div class="board">
+
+        <!-- FOTO UTAMA — ganti src="" dengan URL foto couple -->
+        <div class="main-photo">
+          <div class="placeholder">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span>Foto Utama</span>
+            <span style="font-size:8px;color:#777;font-family:'Space Grotesk',sans-serif">ganti &lt;img src="URL"&gt;</span>
+          </div>
+          <!--
+            CARA PAKAI:
+            Hapus <div class="placeholder">...</div> di atas
+            Ganti dengan: <img src="URL_FOTO_KAMU" alt="Abbyan & Nabila">
+          -->
+          <div class="typewriter-overlay">
+            dari hari pertama<br>hingga selamanya
+          </div>
+        </div>
+
+        <!-- POLAROID 1 — ganti src="" -->
+        <div class="polaroid p1">
+          <div class="pin"></div>
+          <div class="ph">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span>Foto 1</span>
+          </div>
+          <!--
+            Hapus <div class="ph">...</div>
+            Ganti: <img src="URL_FOTO_1" alt="">
+          -->
+          <div class="caption">awal mula</div>
+        </div>
+
+        <!-- POLAROID 2 -->
+        <div class="polaroid p2">
+          <div class="pin"></div>
+          <div class="ph">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span>Foto 2</span>
+          </div>
+          <div class="caption">together</div>
+        </div>
+
+        <!-- POLAROID 3 -->
+        <div class="polaroid p3">
+          <div class="pin"></div>
+          <div class="ph">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span>Foto 3</span>
+          </div>
+          <div class="caption">kenangan</div>
+        </div>
+
+        <!-- POLAROID 4 -->
+        <div class="polaroid p4">
+          <div class="pin"></div>
+          <div class="ph">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+            <span>Foto 4</span>
+          </div>
+          <div class="caption">forever</div>
+        </div>
+
+      </div>
+
+      <div class="handwriting">
+        "two people. one story.<br>a lifetime to write."
+      </div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="rsvp-section">
+      <div class="section-tag">RSVP</div>
+      <input class="rsvp-input" type="text" id="rsvp-nama" placeholder="Nama lengkap" />
+      <input class="rsvp-input" type="text" id="rsvp-tamu" placeholder="Jumlah tamu" />
+      <div class="rsvp-radio-group">
+        <div class="rsvp-radio selected" onclick="selectRsvp(this)">Hadir</div>
+        <div class="rsvp-radio" onclick="selectRsvp(this)">Tidak hadir</div>
+      </div>
+      <button class="rsvp-btn" onclick="submitRsvp()">Kirim Konfirmasi</button>
+    </div>
+
+    <!-- AMPLOP DIGITAL -->
+    <div class="amplop-section">
+      <div class="section-tag">Amplop Digital</div>
+      <div class="bank-row">
+        <div>
+          <div class="bank-name">BCA</div>
+          <div class="bank-atas">a.n. Abbyan Nur Faizy</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+          <div style="font-size:13px;font-weight:500">1234567890</div>
+          <button class="copy-btn" onclick="copyText('1234567890')">Salin</button>
+        </div>
+      </div>
+      <div class="bank-row">
+        <div>
+          <div class="bank-name">Mandiri</div>
+          <div class="bank-atas">a.n. Nabila Alifia</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+          <div style="font-size:13px;font-weight:500">0987654321</div>
+          <button class="copy-btn" onclick="copyText('0987654321')">Salin</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-section">
+      <div class="footer-names">Abbyan &amp; Nabila</div>
+      <div class="footer-date">24 · 08 · 2025</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // Countdown
+  function updateCountdown() {
+    const wedding = new Date('2025-08-24T00:00:00');
+    const now = new Date();
+    const diff = Math.ceil((wedding - now) / (1000 * 60 * 60 * 24));
+    const el = document.getElementById('countdown-days');
+    if (el) el.textContent = diff > 0 ? diff : '0';
+  }
+  updateCountdown();
+
+  // RSVP
+  function selectRsvp(el) {
+    document.querySelectorAll('.rsvp-radio').forEach(r => r.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  function submitRsvp() {
+    const nama = document.getElementById('rsvp-nama').value.trim();
+    if (!nama) { showToast('Mohon isi nama lengkap'); return; }
+    showToast('Konfirmasi terkirim. Terima kasih, ' + nama + '!');
+  }
+
+  // Copy
+  function copyText(text) {
+    navigator.clipboard.writeText(text)
+      .then(() => showToast('Nomor rekening disalin ✓'))
+      .catch(() => showToast('Salin: ' + text));
+  }
+
+  // Toast
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+</script>
+</body>
+</html>
